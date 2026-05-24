@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
 import { ProductsClient } from "@/components/products-client"
 import { Navbar } from "@/components/navbar"
 import type { Metadata } from "next"
@@ -11,10 +9,6 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductsPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect("/auth/login")
-
   return (
     <div className={styles.page}>
       <Navbar />
