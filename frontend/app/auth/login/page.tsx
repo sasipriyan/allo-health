@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff, LockKeyhole, Mail, PackageCheck, ShieldCheck, Sparkles } from "lucide-react"
 import { login } from "@/app/auth/actions"
@@ -10,7 +11,9 @@ import { Label } from "@/components/ui/label"
 import styles from "@/styles/Auth.module.css"
 
 export default function LoginPage() {
-  const [error, setError] = useState<string | null>(null)
+  const searchParams = useSearchParams()
+  const urlError = searchParams.get("error")
+  const [error, setError] = useState<string | null>(urlError)
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 

@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [confirmEmail, setConfirmEmail] = useState(false)
 
   async function handleSubmit(formData: FormData) {
     const password = formData.get("password") as string
@@ -31,7 +32,43 @@ export default function RegisterPage() {
     if (result?.error) {
       setError(result.error)
       setLoading(false)
+    } else if (result?.confirmEmail) {
+      setConfirmEmail(true)
     }
+  }
+
+  if (confirmEmail) {
+    return (
+      <main className={styles.page}>
+        <div className={styles.registerGrid}>
+          <section className={styles.formSide}>
+            <div className={styles.formWrap}>
+              <div className={styles.formCard}>
+                <p className={styles.eyebrow}>Allo Health</p>
+                <h1 className={styles.title}>Check your email</h1>
+                <p className={styles.subtitle}>
+                  We sent a confirmation link to your inbox. Click it to activate your account and sign in.
+                </p>
+                <div className={styles.switchBox} style={{ marginTop: "1.5rem" }}>
+                  Already confirmed?{" "}
+                  <Link href="/auth/login" className={styles.switchLink}>
+                    Sign in
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className={styles.hero}>
+            <img
+              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&h=1200&fit=crop&auto=format&q=85"
+              alt="Digital healthcare workspace"
+              className={styles.heroImage}
+            />
+            <div className={styles.heroOverlayRegister} />
+          </section>
+        </div>
+      </main>
+    )
   }
 
   return (
