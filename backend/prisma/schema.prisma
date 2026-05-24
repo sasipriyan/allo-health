@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id           String           @id @default(cuid())
+  name         String
+  description  String?
+  price        Decimal          @db.Decimal(10, 2)
+  imageUrl     String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  stock        InventoryStock[]
+  reservations Reservation[]
+}
+
+model Warehouse {
+  id           String           @id @default(cuid())
+  name         String
+  location     String
+  createdAt    DateTime         @default(now())
+  stock        InventoryStock[]
+  reservations Reservation[]
+}
+
+model InventoryStock {
+  id            String    @id @default(cuid())
+  productId     String
+  warehouseId   String
+  totalUnits    Int
+  reservedUnits Int       @default(0)
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  warehouse     Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, warehouseId])
+}
+
+model Reservation {
+  id             String            @id @default(cuid())
+  productId      String
+  warehouseId    String
+  userId         String
+  userEmail      String?
+  userName       String?
+  quantity       Int
+  status         ReservationStatus @default(PENDING)
+  expiresAt      DateTime
+  idempotencyKey String?           @unique
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  product        Product           @relation(fields: [productId], references: [id])
+  warehouse      Warehouse         @relation(fields: [warehouseId], references: [id])
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  RELEASED
+}

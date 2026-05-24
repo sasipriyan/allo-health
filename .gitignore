@@ -1,0 +1,20 @@
+node_modules/
+.next/
+dist/
+build/
+
+.env
+.env.*
+!.env.example
+
+*.tsbuildinfo
+next-env.d.ts
+razorpay_test_api_keys_*.csv
+unpacked_docx/
+docx_unpacked/
+
+# Claude Code internal
+.claude/
+
+# Exercise brief (keep locally, not in repo)
+*.docx

@@ -1,0 +1,26 @@
+import { redirect } from "next/navigation"
+import { createClient } from "@/lib/supabase/server"
+import { ProductsClient } from "@/components/products-client"
+import { Navbar } from "@/components/navbar"
+import type { Metadata } from "next"
+import styles from "@/styles/PageLayout.module.css"
+
+export const metadata: Metadata = {
+  title: "Products",
+  description: "Browse products with live stock across warehouses.",
+}
+
+export default async function ProductsPage() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect("/auth/login")
+
+  return (
+    <div className={styles.page}>
+      <Navbar />
+      <main className={styles.content}>
+        <ProductsClient />
+      </main>
+    </div>
+  )
+}

@@ -1,0 +1,310 @@
+.page {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.main {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.side {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.profileCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #10131f;
+  color: #ffffff;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.profileGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 0%, rgb(84 214 182 / 34%), transparent 38%);
+}
+
+.profileInner {
+  position: relative;
+}
+
+.avatar {
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: #54d6b6;
+  color: #071712;
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 18%);
+}
+
+.name {
+  margin-top: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+.email {
+  margin-top: 0.25rem;
+  color: rgb(255 255 255 / 66%);
+  font-size: 0.875rem;
+}
+
+.joined {
+  margin-top: 1.25rem;
+  width: fit-content;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 10%);
+  color: rgb(255 255 255 / 76%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+}
+
+.panel,
+.stat,
+.dataPanel {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.quickPanel {
+  composes: panel;
+  padding: 1rem;
+}
+
+.quickTitle,
+.eyebrow,
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.quickTitle,
+.statLabel {
+  color: var(--muted-foreground);
+}
+
+.quickList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.quickLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 160ms ease;
+}
+
+.quickLink:hover {
+  background: var(--muted);
+}
+
+.quickArrow {
+  color: var(--muted-foreground);
+}
+
+.contentStack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.heroPanel {
+  composes: panel;
+  padding: 1.5rem;
+}
+
+.eyebrow {
+  color: var(--primary);
+  letter-spacing: 0.24em;
+}
+
+.heading {
+  margin-top: 0.75rem;
+  font-size: 1.875rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.copy {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.statGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.stat {
+  padding: 1.25rem;
+}
+
+.statValue {
+  margin-top: 0.75rem;
+  overflow-wrap: anywhere;
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.statPrimary {
+  color: var(--primary);
+}
+
+.statWarning {
+  color: #d97706;
+}
+
+.statDefault {
+  color: var(--foreground);
+}
+
+.dataPanel {
+  overflow: hidden;
+}
+
+.dataHeader {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+}
+
+.dataTitle {
+  font-weight: 700;
+}
+
+.dataCopy {
+  margin-top: 0.25rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.dataRow {
+  display: grid;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+}
+
+.dataRow:last-child {
+  border-bottom: 0;
+}
+
+.dataLabel {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.dataValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.billingPanel {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #e8fbf5;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.billingInner {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.billingEyebrow {
+  color: #227562;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.billingTitle {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+.billingLink {
+  display: inline-flex;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: #10131f;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding-inline: 1.25rem;
+  transition: background-color 160ms ease;
+}
+
+.billingLink:hover {
+  background: var(--primary);
+}
+
+@media (min-width: 640px) {
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dataRow {
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+  }
+
+  .dataValue {
+    text-align: right;
+  }
+}
+
+@media (min-width: 768px) {
+  .billingInner {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 360px 1fr;
+  }
+}

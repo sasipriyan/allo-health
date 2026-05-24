@@ -1,0 +1,338 @@
+.page {
+  min-height: 100vh;
+  background: #f5f7f7;
+  color: #10131f;
+}
+
+.loginGrid,
+.registerGrid {
+  display: grid;
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  display: none;
+  overflow: hidden;
+  background: #10131f;
+  color: #ffffff;
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.34;
+}
+
+.heroOverlayLogin {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(16 19 31 / 96%), rgb(16 19 31 / 70%), rgb(16 19 31 / 42%));
+}
+
+.heroOverlayRegister {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, rgb(16 19 31 / 95%), rgb(16 19 31 / 72%), rgb(16 19 31 / 45%));
+}
+
+.heroGlow {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 14rem;
+  background: linear-gradient(0deg, rgb(84 214 182 / 24%), transparent);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brandMark,
+.mobileMark {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+.brandMark {
+  background: #54d6b6;
+  color: #071712;
+  box-shadow: 0 14px 40px rgb(84 214 182 / 20%);
+}
+
+.mobileMark {
+  background: #10131f;
+  color: #ffffff;
+}
+
+.brandName {
+  font-weight: 900;
+}
+
+.brandSub {
+  margin-top: 0.125rem;
+  color: rgb(255 255 255 / 48%);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.heroCopy {
+  max-width: 42rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 10%);
+  color: #9ff0db;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+}
+
+.heroTitle {
+  margin-top: 1.25rem;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.heroCards {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  max-width: 36rem;
+}
+
+.heroCard,
+.heroLine {
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.75rem;
+  background: rgb(255 255 255 / 10%);
+  backdrop-filter: blur(10px);
+}
+
+.heroCard {
+  padding: 1rem;
+}
+
+.heroCardText,
+.heroLineText {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.heroCardText {
+  margin-top: 0.75rem;
+}
+
+.heroLine {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.heroFoot {
+  position: relative;
+  z-index: 1;
+  color: rgb(255 255 255 / 46%);
+  font-size: 0.75rem;
+}
+
+.formSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.formWrap {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.mobileBrand {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin-top: 1rem;
+  color: #227562;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 0.75rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.formCard {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: #ffffff;
+  padding: 1.75rem;
+  box-shadow: 0 22px 50px rgb(16 19 31 / 8%);
+}
+
+.formContent {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.registerFields {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  color: var(--muted-foreground);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.inputWithLeftIcon {
+  height: 3rem;
+  padding-left: 2.5rem;
+}
+
+.passwordInput {
+  height: 3rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--muted-foreground);
+  transform: translateY(-50%);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.eyeButton:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.error {
+  border: 1px solid rgb(254 202 202);
+  border-radius: 0.75rem;
+  background: rgb(254 242 242);
+  color: rgb(185 28 28);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+}
+
+.submit {
+  height: 3rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 900;
+}
+
+.switchBox {
+  margin-top: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--muted) 35%, transparent);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.switchLink {
+  color: #227562;
+  font-weight: 900;
+  text-underline-offset: 4px;
+}
+
+.switchLink:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  .heroCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .loginGrid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .registerGrid {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+
+  .hero {
+    display: block;
+  }
+
+  .mobileBrand {
+    display: none;
+  }
+}
