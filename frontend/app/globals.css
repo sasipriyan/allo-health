@@ -119,6 +119,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    color: #10131f;
+    background-color: #f7f8fb;
   }
   html {
     @apply font-sans;

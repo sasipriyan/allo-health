@@ -153,6 +153,7 @@
   font-size: 1.875rem;
   font-weight: 650;
   letter-spacing: 0;
+  color: #10131f;
 }
 
 .copy {
@@ -176,6 +177,7 @@
   overflow-wrap: anywhere;
   font-size: 1.125rem;
   font-weight: 650;
+  color: #10131f;
 }
 
 .statPrimary {
@@ -201,6 +203,7 @@
 
 .dataTitle {
   font-weight: 700;
+  color: #10131f;
 }
 
 .dataCopy {
