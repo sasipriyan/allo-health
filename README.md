@@ -21,8 +21,15 @@ Hi, I've completed the Allo Health engineering take-home exercise. All core requ
 
 You can register a new account or use these directly:
 
+**Account 1**
 **Email:** sasipriyan.a2025@vitstudent.ac.in
 **Password:** sasi11
+
+**Account 2**
+**Email:** test@gmail.com
+**Password:** test11
+
+You can log in with both accounts on different devices or browsers simultaneously to test the concurrency flow — add the same product from both sessions within the 10-minute reservation window and see which one wins.
 
 > **Note on registration:** Email verification is turned off due to Supabase free tier limitations — new accounts are active immediately after registration.
 
@@ -30,7 +37,7 @@ You can register a new account or use these directly:
 
 ## Testing Concurrency (the core requirement)
 
-Open the site in two separate browser sessions (or two different browsers) at the same time. Add the same product in both sessions and proceed to checkout — you'll see how the system handles competing reservations for the same inventory in real time. One will succeed, the other will get a clear error.
+Open the site in two separate browser sessions (or two different browsers) at the same time using the two test accounts above. Add the same product in both sessions and proceed to checkout — you'll see how the system handles competing reservations for the same inventory in real time. One will succeed, the other will get a clear error.
 
 ---
 
