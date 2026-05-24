@@ -24,9 +24,7 @@ You can register a new account or use these directly:
 **Email:** sasipriyan.a2025@vitstudent.ac.in
 **Password:** sasi11
 
-> **Note on registration:** If you register a new account, the confirmation email will redirect to localhost due to a Supabase redirect setting — use the test credentials above to avoid this.
-
-> **Note on first load:** The backend is on Railway's free tier and may take 10–15 seconds to wake up on the first visit. Products will load once it's up.
+> **Note on registration:** Email verification is turned off due to Supabase free tier limitations — new accounts are active immediately after registration.
 
 ---
 
