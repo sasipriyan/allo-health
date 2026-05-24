@@ -38,7 +38,13 @@ export async function middleware(request: NextRequest) {
     pathname === "/billingdetails" ||
     pathname === "/stockdetails" ||
     pathname === "/stockdetaisl"
-  const isPublic = pathname === "/" || isAdminRoute || isAdminAlias
+  const isBrowseable =
+    pathname === "/products" ||
+    pathname.startsWith("/products/") ||
+    pathname === "/orders" ||
+    pathname === "/cart" ||
+    pathname === "/billing"
+  const isPublic = pathname === "/" || isAdminRoute || isAdminAlias || isBrowseable
 
   if (!user && !isAuthRoute && !isApiRoute && !isPublic) {
     return NextResponse.redirect(new URL("/auth/login", request.url))

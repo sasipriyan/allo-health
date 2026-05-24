@@ -2,9 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
-  background: color-mix(in srgb, var(--background) 78%, transparent);
+  border-bottom: 1px solid rgba(16, 19, 31, 0.12);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
+  box-shadow: 0 1px 12px rgba(16, 19, 31, 0.08);
 }
 
 .inner {
@@ -62,7 +63,7 @@
 }
 
 .brandSub {
-  display: none;
+  display: block;
   color: var(--muted-foreground);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -560,7 +561,6 @@
     font-size: 0.875rem;
   }
 
-  .brandSub,
   .cartText,
   .profileName {
     display: block;
@@ -578,7 +578,7 @@
 
 @media (min-width: 1024px) {
   .header {
-    background: rgb(255 255 255 / 88%);
+    background: rgba(255, 255, 255, 0.95);
   }
 
   .inner {
