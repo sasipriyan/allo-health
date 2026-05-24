@@ -2,10 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid rgba(16, 19, 31, 0.12);
-  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #e2e5ed;
+  background: #ffffff;
   backdrop-filter: blur(18px);
-  box-shadow: 0 1px 12px rgba(16, 19, 31, 0.08);
+  box-shadow: 0 2px 16px rgba(16, 19, 31, 0.10);
 }
 
 .inner {
@@ -37,7 +37,7 @@
   overflow: hidden;
   border-radius: 0.75rem;
   background: #10131f;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
   transition: transform 180ms ease;
 }
 
@@ -57,14 +57,15 @@
 
 .brandName {
   display: block;
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 900;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
+  color: #10131f;
 }
 
 .brandSub {
   display: block;
-  color: var(--muted-foreground);
+  color: #6b7280;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -74,16 +75,16 @@
 .nav {
   display: none;
   align-items: center;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--card) 82%, transparent);
+  background: #f7f8fb;
   padding: 0.25rem;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .navLink {
   border-radius: 999px;
-  color: var(--muted-foreground);
+  color: #4b5563;
   font-size: 0.875rem;
   font-weight: 700;
   padding: 0.5rem 1rem;
@@ -91,14 +92,14 @@
 }
 
 .navLink:hover {
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
-  color: var(--foreground);
+  background: #e9ebf0;
+  color: #10131f;
 }
 
 .navLinkActive {
   background: #10131f;
   color: #ffffff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 .actions {
@@ -116,12 +117,13 @@
   height: 2.5rem;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 999px;
-  background: var(--card);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   font-size: 0.875rem;
   font-weight: 800;
+  color: #10131f;
   transition: transform 180ms ease, background-color 180ms ease;
 }
 
@@ -138,18 +140,18 @@
   width: 2.5rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 999px;
-  background: var(--card);
-  color: var(--foreground);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+  background: #ffffff;
+  color: #10131f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: background-color 160ms ease, transform 160ms ease;
 }
 
 .mobileToggle:hover,
 .mobileClose:hover,
 .mobileAccount:hover {
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  background: #f0f1f5;
 }
 
 .mobileToggle {
@@ -168,7 +170,7 @@
 .cartLink:hover,
 .profileButton:hover {
   transform: translateY(-2px);
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  background: #f0f1f5;
 }
 
 .cartActive {
@@ -200,7 +202,7 @@
   height: 2.5rem;
   width: 6rem;
   border-radius: 999px;
-  background: var(--muted);
+  background: #e9ebf0;
   animation: pulse 1.8s ease-in-out infinite;
 }
 
@@ -210,7 +212,7 @@
 }
 
 .profileButton {
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   min-width: 2.75rem;
   max-width: 11.75rem;
   gap: 0.5rem;
@@ -238,7 +240,7 @@
   height: 1.125rem;
   width: 1.125rem;
   flex: 0 0 1.125rem;
-  color: var(--muted-foreground);
+  color: #6b7280;
   transition: transform 180ms ease;
 }
 
@@ -252,9 +254,9 @@
   margin-top: 0.75rem;
   width: 18rem;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 1rem;
-  background: var(--card);
+  background: #ffffff;
   box-shadow: 0 24px 60px rgb(0 0 0 / 18%);
 }
 
@@ -282,7 +284,7 @@
   width: min(22rem, calc(100vw - 1.25rem));
   flex-direction: column;
   overflow: hidden;
-  border-left: 1px solid oklch(0.89 0.008 276);
+  border-left: 1px solid #e2e5ed;
   background: #f7f8fb;
   box-shadow: -24px 0 70px rgb(16 19 31 / 24%);
   animation: drawer-in 180ms ease both;
@@ -294,13 +296,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid oklch(0.89 0.008 276);
+  border-bottom: 1px solid #e2e5ed;
   background: #ffffff;
   padding: 1rem;
 }
 
 .mobileEyebrow {
-  color: var(--muted-foreground);
+  color: #6b7280;
   font-size: 0.6875rem;
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -311,6 +313,7 @@
   margin-top: 0.25rem;
   font-size: 1.25rem;
   font-weight: 900;
+  color: #10131f;
 }
 
 .mobileNav {
@@ -327,7 +330,7 @@
   min-height: 3.1rem;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid oklch(0.89 0.008 276);
+  border: 1px solid #e2e5ed;
   border-radius: 0.875rem;
   background: #ffffff;
   color: #10131f;
@@ -345,7 +348,7 @@
 
 .mobileFooter {
   flex: 0 0 auto;
-  border-top: 1px solid oklch(0.89 0.008 276);
+  border-top: 1px solid #e2e5ed;
   background: #ffffff;
   padding: 1rem;
 }
@@ -374,7 +377,7 @@
 }
 
 .mobileSecondary {
-  border: 1px solid oklch(0.89 0.008 276);
+  border: 1px solid #e2e5ed;
   background: #ffffff;
   color: #10131f;
 }
@@ -440,7 +443,7 @@
 }
 
 .menuFoot {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #e2e5ed;
 }
 
 .dropdownLink,
@@ -455,19 +458,20 @@
   padding: 0.625rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 700;
+  color: #10131f;
   transition: background-color 160ms ease;
 }
 
 .dropdownLink:hover {
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  background: #f0f1f5;
 }
 
 .signOut {
-  color: var(--destructive);
+  color: #dc2626;
 }
 
 .signOut:hover {
-  background: color-mix(in srgb, var(--destructive) 8%, transparent);
+  background: rgb(239 68 68 / 8%);
 }
 
 .guestActions {
@@ -478,7 +482,7 @@
 
 .signIn {
   border-radius: 999px;
-  color: var(--muted-foreground);
+  color: #4b5563;
   font-size: 0.875rem;
   font-weight: 800;
   padding: 0.5rem 1rem;
@@ -486,8 +490,8 @@
 }
 
 .signIn:hover {
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
-  color: var(--foreground);
+  background: #f0f1f5;
+  color: #10131f;
 }
 
 .getStarted {
@@ -497,13 +501,13 @@
   font-size: 0.875rem;
   font-weight: 800;
   padding: 0.5rem 1rem;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 12%);
   transition: transform 160ms ease, background-color 160ms ease;
 }
 
 .getStarted:hover {
   transform: translateY(-2px);
-  background: var(--primary);
+  background: #1e2235;
 }
 
 .iconWhite {
@@ -521,7 +525,7 @@
 .iconMuted {
   height: 1rem;
   width: 1rem;
-  color: var(--muted-foreground);
+  color: #6b7280;
 }
 
 @keyframes pulse {
@@ -558,7 +562,7 @@
   }
 
   .brandName {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .cartText,
@@ -578,7 +582,7 @@
 
 @media (min-width: 1024px) {
   .header {
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
   }
 
   .inner {
