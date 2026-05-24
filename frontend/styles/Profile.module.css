@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: var(--background);
+  background: #ffffff;
 }
 
 .main {
@@ -22,7 +22,7 @@
 .profileCard {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 0.75rem;
   background: #10131f;
   color: #ffffff;
@@ -83,9 +83,9 @@
 .panel,
 .stat,
 .dataPanel {
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 0.75rem;
-  background: var(--card);
+  background: #ffffff;
   box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
 }
 
@@ -105,7 +105,7 @@
 
 .quickTitle,
 .statLabel {
-  color: var(--muted-foreground);
+  color: #6b7280;
 }
 
 .quickList {
@@ -126,11 +126,11 @@
 }
 
 .quickLink:hover {
-  background: var(--muted);
+  background: #f0f1f5;
 }
 
 .quickArrow {
-  color: var(--muted-foreground);
+  color: #6b7280;
 }
 
 .contentStack {
@@ -144,7 +144,7 @@
 }
 
 .eyebrow {
-  color: var(--primary);
+  color: #10131f;
   letter-spacing: 0.24em;
 }
 
@@ -157,7 +157,7 @@
 
 .copy {
   margin-top: 0.5rem;
-  color: var(--muted-foreground);
+  color: #6b7280;
   font-size: 0.875rem;
   line-height: 1.75;
 }
@@ -179,7 +179,7 @@
 }
 
 .statPrimary {
-  color: var(--primary);
+  color: #10131f;
 }
 
 .statWarning {
@@ -187,7 +187,7 @@
 }
 
 .statDefault {
-  color: var(--foreground);
+  color: #10131f;
 }
 
 .dataPanel {
@@ -195,7 +195,7 @@
 }
 
 .dataHeader {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e2e5ed;
   padding: 1rem 1.5rem;
 }
 
@@ -205,14 +205,14 @@
 
 .dataCopy {
   margin-top: 0.25rem;
-  color: var(--muted-foreground);
+  color: #6b7280;
   font-size: 0.875rem;
 }
 
 .dataRow {
   display: grid;
   gap: 0.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e2e5ed;
   padding: 1rem 1.5rem;
 }
 
@@ -221,7 +221,7 @@
 }
 
 .dataLabel {
-  color: var(--muted-foreground);
+  color: #6b7280;
   font-size: 0.875rem;
 }
 
@@ -231,13 +231,13 @@
 }
 
 .mono {
-  font-family: var(--font-mono);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.75rem;
 }
 
 .billingPanel {
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid #e2e5ed;
   border-radius: 0.75rem;
   background: #e8fbf5;
   box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
@@ -278,7 +278,27 @@
 }
 
 .billingLink:hover {
-  background: var(--primary);
+  background: #10131f;
+}
+
+.signOutButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: 0.75rem;
+  background: rgba(220, 38, 38, 0.06);
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 800;
+  transition: background-color 160ms ease;
+}
+
+.signOutButton:hover {
+  background: rgba(220, 38, 38, 0.12);
 }
 
 @media (min-width: 640px) {

@@ -7,7 +7,7 @@
 .solidHero {
   position: relative;
   overflow: hidden;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
   background: #10131f;
   color: #fff;
@@ -134,9 +134,9 @@
 .orderCard,
 .reservationCard,
 .testModeCard {
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
-  background: hsl(var(--card));
+  background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
 }
 
@@ -183,9 +183,9 @@
   min-height: 520px;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
-  background: hsl(var(--card));
+  background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
   animation: rise-in 600ms ease both;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -201,7 +201,7 @@
   position: relative;
   aspect-ratio: 1.22;
   overflow: hidden;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .productImage,
@@ -287,7 +287,7 @@
 
 .mutedText,
 .smallMuted {
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
 }
 
 .mutedText {
@@ -305,9 +305,9 @@
 }
 
 .stockBox {
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
-  background: hsl(var(--muted) / 0.3);
+  background: #f7f8fb;
   padding: 0.75rem;
 }
 
@@ -327,21 +327,21 @@
   flex-shrink: 0;
   border-radius: 0.375rem;
   padding: 0.375rem 0.625rem;
-  color: hsl(var(--primary));
+  color: #10131f;
   font-size: 0.75rem;
   font-weight: 800;
   transition: background 160ms ease;
 }
 
 .ghostTinyButton:hover {
-  background: hsl(var(--primary) / 0.1);
+  background: rgba(16, 19, 31, 0.08);
 }
 
 .warehouseList {
   display: grid;
   gap: 0.5rem;
   margin-top: 0.75rem;
-  border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid #e2e5ed;
   padding-top: 0.75rem;
 }
 
@@ -360,8 +360,8 @@
 }
 
 .unitNone {
-  background: hsl(var(--muted));
-  color: hsl(var(--muted-foreground));
+  background: #f0f1f5;
+  color: #6b7280;
 }
 
 .unitLow {
@@ -376,7 +376,7 @@
 
 .quantityPanel {
   margin-top: auto;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
   background: #10131f;
   padding: 0.375rem;
@@ -446,7 +446,7 @@
 .skeletonCard,
 .skeletonTable {
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
@@ -456,14 +456,14 @@
 
 .skeletonCard {
   height: 520px;
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--card));
+  border: 1px solid #e2e5ed;
+  background: #ffffff;
 }
 
 .skeletonTable {
   height: 24rem;
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--card));
+  border: 1px solid #e2e5ed;
+  background: #ffffff;
 }
 
 .emptyState {
@@ -480,7 +480,7 @@
   justify-content: center;
   margin: 0 auto 1rem;
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .emptyTitle {
@@ -499,7 +499,7 @@
 }
 
 .summaryLabel {
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -520,7 +520,7 @@
 
 .summaryAmount,
 .orderAmount {
-  color: hsl(var(--primary));
+  color: #10131f;
   font-weight: 800;
 }
 
@@ -543,9 +543,9 @@
 }
 
 .noticeError {
-  border-color: hsl(var(--destructive) / 0.3);
-  background: hsl(var(--destructive) / 0.08);
-  color: hsl(var(--destructive));
+  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
 }
 
 .cartItems {
@@ -564,7 +564,7 @@
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .itemContent {
@@ -605,9 +605,9 @@
   grid-template-columns: 38px 64px 38px;
   align-items: center;
   overflow: hidden;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
-  background: hsl(var(--muted) / 0.3);
+  background: #f7f8fb;
 }
 
 .qtyButtonLight {
@@ -616,11 +616,11 @@
 }
 
 .qtyButtonLight:hover {
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .qtyNumber {
-  border-inline: 1px solid hsl(var(--border));
+  border-inline: 1px solid #e2e5ed;
   text-align: center;
   font-size: 0.875rem;
   font-weight: 800;
@@ -630,13 +630,13 @@
 .removeButton {
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
   transition: background 160ms ease, color 160ms ease;
 }
 
 .removeButton:hover {
-  background: hsl(var(--destructive) / 0.08);
-  color: hsl(var(--destructive));
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
 }
 
 .itemPrice {
@@ -680,7 +680,7 @@
   display: grid;
   gap: 0.75rem;
   margin-top: 1.25rem;
-  border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid #e2e5ed;
   padding-top: 1.25rem;
 }
 
@@ -727,21 +727,21 @@
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .orderInfoGrid {
   display: grid;
   gap: 0.75rem;
   margin-top: 1rem;
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
   font-size: 0.75rem;
 }
 
 .infoPill {
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.5rem;
-  background: hsl(var(--muted) / 0.3);
+  background: #f7f8fb;
   padding: 0.75rem;
 }
 
@@ -754,7 +754,7 @@
 
 .infoValue {
   margin-top: 0.25rem;
-  color: hsl(var(--foreground));
+  color: #10131f;
   font-size: 0.75rem;
   font-weight: 650;
 }
@@ -779,10 +779,10 @@
 .tableHeader {
   display: none;
   gap: 1rem;
-  border-bottom: 1px solid hsl(var(--border));
-  background: hsl(var(--muted) / 0.4);
+  border-bottom: 1px solid #e2e5ed;
+  background: #f0f1f5;
   padding: 0.75rem 1.25rem;
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -796,7 +796,7 @@
 .billingRow {
   display: grid;
   gap: 1rem;
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: 1px solid #e2e5ed;
   padding: 1.25rem;
   animation: rise-in 600ms ease both;
   transition: background 160ms ease;
@@ -807,7 +807,7 @@
 }
 
 .billingRow:hover {
-  background: hsl(var(--muted) / 0.25);
+  background: #f9fafb;
 }
 
 .billingItem {
@@ -824,7 +824,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
+  background: #f0f1f5;
 }
 
 .truncateTitle {
@@ -847,9 +847,9 @@
 }
 
 .statusFailed {
-  border-color: hsl(var(--destructive) / 0.25);
-  background: hsl(var(--destructive) / 0.1);
-  color: hsl(var(--destructive));
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
 }
 
 .statusPending {
@@ -886,13 +886,13 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
   font-size: 0.875rem;
   transition: color 160ms ease;
 }
 
 .backButton:hover {
-  color: hsl(var(--foreground));
+  color: #10131f;
 }
 
 .reservationCard {
@@ -904,7 +904,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: 1px solid #e2e5ed;
   padding: 1.25rem 1.5rem;
 }
 
@@ -933,9 +933,9 @@
 
 .countdownBox,
 .stateBox {
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e5ed;
   border-radius: 0.75rem;
-  background: hsl(var(--muted) / 0.3);
+  background: #f7f8fb;
   padding: 1rem 1.25rem;
 }
 
@@ -951,7 +951,7 @@
   width: 100%;
   overflow: hidden;
   border-radius: 999px;
-  background: hsl(var(--border));
+  background: #e2e5ed;
 }
 
 .progressBar {
@@ -961,7 +961,7 @@
 }
 
 .progressOk {
-  background: hsl(var(--primary));
+  background: #10131f;
 }
 
 .progressWarn {
@@ -969,7 +969,7 @@
 }
 
 .progressDanger {
-  background: hsl(var(--destructive));
+  background: #dc2626;
 }
 
 .reservationActions {
@@ -1039,17 +1039,17 @@
 .iconMedium {
   height: 1.5rem;
   width: 1.5rem;
-  color: hsl(var(--muted-foreground));
+  color: #6b7280;
 }
 
 .iconLarge {
   height: 2rem;
   width: 2rem;
-  color: hsl(var(--muted-foreground) / 0.5);
+  color: rgba(107, 114, 128, 0.5);
 }
 
 .iconMuted {
-  color: hsl(var(--muted-foreground) / 0.3);
+  color: rgba(107, 114, 128, 0.3);
 }
 
 .spinner {

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Navbar } from "@/components/navbar"
+import { SignOutButton } from "@/components/sign-out-button"
 import type { Metadata } from "next"
 import styles from "@/styles/Profile.module.css"
 
@@ -47,6 +48,8 @@ export default async function ProfilePage() {
                 <ActionLink href="/cart" label="Checkout bag" />
               </div>
             </section>
+
+            <SignOutButton />
           </aside>
 
           <section className={styles.contentStack}>
