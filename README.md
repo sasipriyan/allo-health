@@ -29,7 +29,7 @@ You can register a new account or use these directly:
 **Email:** test@gmail.com
 **Password:** test11
 
-You can log in with both accounts on different devices or browsers simultaneously to test the concurrency flow — add the same product from both sessions within the 10-minute reservation window and see which one wins.
+You can log in with both accounts on different devices or browsers simultaneously to test the concurrency flow — add the same product from both sessions and proceed to payment. Whichever account completes the payment first will confirm the reservation and immediately reduce the stock. The second account will get a clear error showing the stock is no longer available.
 
 > **Note on registration:** Email verification is turned off due to Supabase free tier limitations — new accounts are active immediately after registration.
 
