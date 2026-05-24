@@ -1,6 +1,62 @@
 # Allo Health — Inventory & Reservation Platform
 
-A full-stack take-home implementation for the Allo Engineering exercise. The core problem is protecting inventory while multiple users may be trying to buy the same item at the same time. This app solves it by separating browsing from reservation, using atomic database updates for stock, verifying payment server-side, and cleaning up expired holds automatically.
+Hi, I've completed the Allo Health engineering take-home exercise. All core requirements have been implemented and the application is fully live.
+
+**Live URL:** https://allohealthproject.vercel.app
+
+---
+
+## Hosting & Stack
+
+| Layer | Technology | Hosted On |
+|-------|-----------|-----------|
+| Frontend | Next.js 16 | Vercel |
+| Backend API | Express + TypeScript | Railway |
+| Authentication | Supabase Auth | Supabase |
+| Database | PostgreSQL + Prisma | Railway |
+
+---
+
+## Test Credentials
+
+You can register a new account or use these directly:
+
+**Email:** sasipriyan.a2025@vitstudent.ac.in
+**Password:** sasi11
+
+> **Note on registration:** If you register a new account, the confirmation email will redirect to localhost due to a Supabase redirect setting — use the test credentials above to avoid this.
+
+> **Note on first load:** The backend is on Railway's free tier and may take 10–15 seconds to wake up on the first visit. Products will load once it's up.
+
+---
+
+## Testing Concurrency (the core requirement)
+
+Open the site in two separate browser sessions (or two different browsers) at the same time. Add the same product in both sessions and proceed to checkout — you'll see how the system handles competing reservations for the same inventory in real time. One will succeed, the other will get a clear error.
+
+---
+
+## Test Payment Details
+
+The app uses Razorpay in test mode:
+
+| Method | Details |
+|--------|---------|
+| Card | `5267 3181 8797 5449` / Expiry `08/26` / CVV `123` / OTP `1234` |
+| UPI success | `success@razorpay` |
+| UPI failure | `failure@razorpay` |
+
+For Net Banking, Razorpay test mode lets you simulate success or failure — try both to see how the reservation and billing states update.
+
+---
+
+## Admin Dashboard
+
+Built beyond the spec — an operations panel with analytics, user activity, billing records, and live warehouse stock.
+
+**URL:** https://allohealthproject.vercel.app/admin
+**Username:** admin
+**Password:** admin
 
 ---
 
@@ -31,14 +87,12 @@ A full-stack take-home implementation for the Allo Engineering exercise. The cor
 
 ## Architecture
 
-The project is two services that run side by side locally.
-
 ```
-next-app/    — Next.js 16 frontend (App Router, React 19, Tailwind, shadcn/ui)
-backend/     — Express API (TypeScript, Prisma 7, PostgreSQL via Supabase/Neon)
+frontend/    — Next.js 16 (App Router, React 19, Tailwind) → deployed on Vercel
+backend/     — Express API (TypeScript, Prisma 7, PostgreSQL) → deployed on Railway
 ```
 
-The frontend calls the backend over HTTP. `NEXT_PUBLIC_BACKEND_URL` in the frontend `.env.local` controls the target. The backend verifies every request using the Supabase JWT passed in the `Authorization: Bearer <token>` header.
+The frontend calls the backend over HTTP. `NEXT_PUBLIC_BACKEND_URL` controls the target. The backend verifies every request using the Supabase JWT passed as `Authorization: Bearer <token>`.
 
 ---
 
@@ -158,10 +212,10 @@ Confirm and release also use conditional `updateMany` calls (`WHERE status = 'PE
 
 1. If the header is present, the backend checks `Reservation.idempotencyKey` for a match before doing anything else.
 2. If a matching record exists, the original reservation is returned immediately with `200` — no stock update, no new row.
-3. If no match exists, the reservation is created normally and the key is stored on the new row (`idempotencyKey` column, `@unique` in the schema).
-4. A race condition where two requests with the same key arrive simultaneously is handled: if the `INSERT` throws a unique constraint violation, the handler catches it, re-reads the existing reservation by key, and returns it with `200`.
+3. If no match exists, the reservation is created normally and the key is stored on the new row.
+4. A race where two requests with the same key arrive simultaneously is handled: if the `INSERT` throws a unique constraint violation, the handler catches it, re-reads the existing reservation by key, and returns it with `200`.
 
-The frontend uses `crypto.randomUUID()` to generate a fresh key per checkout attempt and sends it as `Idempotency-Key` on each reservation request. This means retrying a failed checkout does not double-reserve stock.
+The frontend uses `crypto.randomUUID()` to generate a fresh key per checkout attempt. Retrying a failed checkout does not double-reserve stock.
 
 ---
 
@@ -169,34 +223,23 @@ The frontend uses `crypto.randomUUID()` to generate a fresh key per checkout att
 
 Reservations expire after **10 minutes** (`expiresAt = now + 10m`).
 
-Cleanup happens in three ways so the demo stays accurate with or without a cron job running:
+Cleanup happens in three ways:
 
-1. **Lazy cleanup on reads** — `GET /api/products`, `GET /api/reservations`, `POST /api/reservations`, `GET /api/admin/dashboard`, and both payment endpoints call `releaseExpiredReservations()` before returning data. This ensures stock numbers shown to users are always current.
-
-2. **Cron endpoint** — `GET /api/reservations/cron/expire` releases all expired reservations in one pass. Protected by `Authorization: Bearer <CRON_SECRET>`. Can be triggered by any scheduler (Vercel Cron, GitHub Actions, Railway cron, etc.) on a regular interval.
-
-3. **Confirm / release paths** — Both endpoints check `expiresAt` before acting and return `410` if the hold has lapsed.
-
-`releaseExpiredReservations` uses a per-reservation transaction: it updates `status` to RELEASED only if it is still PENDING, then decrements `reservedUnits` (with `GREATEST(..., 0)` to guard against underflow). Concurrent cron calls are safe because the conditional update acts as a lock.
+1. **Lazy cleanup on reads** — `GET /api/products`, `GET /api/reservations`, `POST /api/reservations` and both payment endpoints call `releaseExpiredReservations()` before returning data.
+2. **Cron endpoint** — `GET /api/reservations/cron/expire` releases all expired reservations in one pass, protected by `Authorization: Bearer <CRON_SECRET>`.
+3. **Confirm / release paths** — Both check `expiresAt` before acting and return `410` if the hold has lapsed.
 
 ---
 
 ## Razorpay Integration
 
-The payment flow:
-
 1. Cart calls `POST /api/reservations` for each item (with idempotency key). Failed items (409) are reported but checkout continues with the ones that succeeded.
-2. Cart calls `POST /api/payments/create-order` with the reservation IDs. The backend creates a Razorpay order for the combined total in paise and stores the reservation IDs in the order notes.
+2. Cart calls `POST /api/payments/create-order` with the reservation IDs.
 3. The Razorpay JS SDK opens the checkout modal.
-4. On payment success, the frontend sends `razorpay_payment_id`, `razorpay_order_id`, and `razorpay_signature` to `POST /api/payments/verify`.
-5. The backend recomputes the expected HMAC-SHA256 signature:
-   ```
-   HMAC-SHA256(RAZORPAY_KEY_SECRET, razorpayOrderId + "|" + razorpayPaymentId)
-   ```
-   If it does not match, the request is rejected with `400`.
-6. The backend re-fetches the Razorpay order to confirm the amount and reservation IDs match what it stored earlier.
-7. Each PENDING reservation is confirmed in a transaction: `status` → CONFIRMED, `totalUnits` and `reservedUnits` both decremented by the reserved quantity.
-8. On cancel (modal dismissed), the frontend immediately releases all reservations it created.
+4. On payment success, the frontend sends payment details to `POST /api/payments/verify`.
+5. The backend recomputes the expected HMAC-SHA256 signature and rejects mismatches with `400`.
+6. Each PENDING reservation is confirmed in a transaction: `status` → CONFIRMED, stock decremented.
+7. On cancel, the frontend immediately releases all reservations it created.
 
 ---
 
@@ -206,27 +249,25 @@ The payment flow:
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home page — product categories, featured items, stats |
-| `/products` | Product grid with live stock, per-warehouse breakdown, quantity controls |
-| `/cart` | Editable cart, payment summary, Razorpay checkout button |
+| `/` | Home — product categories, featured items, stats |
+| `/products` | Product grid with live stock and warehouse breakdown |
+| `/cart` | Editable cart, payment summary, Razorpay checkout |
 | `/reservations/[id]` | Reservation detail with countdown, Confirm and Cancel |
 | `/orders` | Confirmed purchase history |
-| `/billing` | All reservation records with status (success / failed / pending) |
+| `/billing` | All reservation records with status |
 | `/profile` | Account summary and quick links |
 | `/auth/login` | Supabase email/password login |
 | `/auth/register` | Account registration |
 
 ### Admin
 
-Admin login credentials are set via `ADMIN_USERNAME` / `ADMIN_PASSWORD` env vars (default `admin` / `admin`).
-
 | Route | Description |
 |-------|-------------|
 | `/admin` | Admin login |
-| `/admin/dashboard` | Analytics overview: revenue, conversions, reservation counts |
-| `/admin/userdetails` | All registered users with reservation count, purchase count, failed payments, and total spend |
-| `/admin/billingdetails` | All billing records with customer, product, warehouse, amount, status |
-| `/admin/stockdetails` | Live warehouse stock table with search and filters |
+| `/admin/dashboard` | Revenue analytics and reservation counts |
+| `/admin/userdetails` | All users with spend, reservation and failure counts |
+| `/admin/billingdetails` | All billing records with customer, product, status |
+| `/admin/stockdetails` | Live warehouse stock with search and filters |
 
 ---
 
@@ -236,7 +277,7 @@ Admin login credentials are set via `ADMIN_USERNAME` / `ADMIN_PASSWORD` env vars
 
 ```bash
 cd backend && npm install
-cd ../next-app && npm install
+cd ../frontend && npm install
 ```
 
 ### 2. Backend environment — `backend/.env`
@@ -249,7 +290,7 @@ DATABASE_URL="postgresql://..."
 
 NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
 SUPABASE_ANON_KEY="your-supabase-anon-key"
-SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"   # optional, for admin user lookups
+SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=admin
@@ -260,27 +301,23 @@ RAZORPAY_KEY_ID="rzp_test_..."
 RAZORPAY_KEY_SECRET="your-razorpay-test-secret"
 ```
 
-### 3. Frontend environment — `next-app/.env.local`
+### 3. Frontend environment — `frontend/.env.local`
 
 ```env
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
 
 NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="your-supabase-publishable-key"
 
 NEXT_PUBLIC_RAZORPAY_KEY_ID="rzp_test_..."
-
-DATABASE_URL="postgresql://..."
-DIRECT_URL="postgresql://..."
 ```
 
 ### 4. Push schema and seed
 
 ```bash
 cd backend
-npm run db:push    # pushes schema to Postgres
-npm run db:seed    # creates 3 warehouses, 6 products, 18 stock entries
+npm run db:push
+npm run db:seed
 ```
 
 ### 5. Start both services
@@ -290,7 +327,7 @@ npm run db:seed    # creates 3 warehouses, 6 products, 18 stock entries
 cd backend && npm run dev
 
 # terminal 2
-cd next-app && npm run dev
+cd frontend && npm run dev
 ```
 
 Open `http://localhost:3000`.
@@ -299,77 +336,37 @@ Open `http://localhost:3000`.
 
 ## Seeded Data
 
-The seed creates:
-
 - **3 warehouses** — Delhi Central, Mumbai West, Bangalore Tech Park
 - **6 products** — Minoxidil 5%, Finasteride 1mg, Hair Fall Kit, Biotin Gummies, Ashwagandha KSM-66, Vitamin D3+K2 Drops
-- **18 stock entries** — each product stocked across all three warehouses (10–80 units per entry)
-
----
-
-## Razorpay Test Credentials
-
-The cart page displays these inline.
-
-| Method | Credentials |
-|--------|-------------|
-| UPI success | `success@razorpay` |
-| UPI failure | `failure@razorpay` |
-| Card | `5267 3181 8797 5449` / exp `08/26` / CVV `123` / OTP `1234` |
+- **18 stock entries** — each product stocked across all three warehouses
 
 ---
 
 ## Tech Stack
 
 **Frontend**
-- Next.js 16 (App Router)
-- React 19, TypeScript
+- Next.js 16 (App Router), React 19, TypeScript
 - Tailwind CSS v4, shadcn/ui
-- Supabase SSR (auth)
-- Razorpay JS SDK
+- Supabase SSR (auth), Razorpay JS SDK
+- Deployed on **Vercel**
 
 **Backend**
 - Express 5, TypeScript
-- Prisma 7 + PostgreSQL (hosted on Supabase or Neon)
-- Supabase JS SDK (JWT verification)
-- Razorpay Node SDK
-- Zod (request validation), Helmet, CORS
-
----
-
-## Useful Commands
-
-**Backend**
-
-```bash
-npm run dev          # dev server with hot reload
-npm run build        # compile TypeScript
-npm run db:push      # push schema without migrations
-npm run db:seed      # seed demo data
-npm run db:studio    # open Prisma Studio
-```
-
-**Frontend**
-
-```bash
-npm run dev          # Next.js dev server (Turbopack)
-npm run build        # production build
-npm run typecheck    # tsc --noEmit
-npm run lint         # ESLint
-```
+- Prisma 7 + PostgreSQL
+- Supabase JS SDK (JWT verification), Razorpay Node SDK
+- Zod (validation), Helmet, CORS
+- Deployed on **Railway** with **Railway PostgreSQL**
 
 ---
 
 ## Trade-offs and Notes
 
-**Cart does not reserve stock.** The cart lives in `localStorage`. Adding items does not start the 10-minute hold. Reservations are created only when the user clicks Pay. This is intentional — penalising browsers with a countdown timer would kill conversion.
+**Cart does not reserve stock.** Cart lives in `localStorage`. Reservations are created only when the user clicks Pay — penalising browsers with a countdown timer before payment would hurt conversion.
 
-**Two-service architecture.** The spec described "a Next.js application with an API", which most naturally means Next.js API routes. This project uses a separate Express backend instead. The reason is Prisma 7's new Postgres adapter works cleanly in a Node process but requires more configuration in Next.js's edge-compatible serverless environment. The trade-off is a second deployment target but a simpler, more conventional backend that is easier to reason about and extend.
+**Separate Express backend.** Prisma 7's Postgres adapter works cleanly in a Node process but needs more configuration in Next.js's serverless environment. The trade-off is a second deployment but a simpler, easier-to-extend backend.
 
-**Simple admin auth.** Admin access uses a username/password check via HTTP headers. For production this should be role-based and tied to Supabase users. It is intentionally minimal for the demo.
+**Simple admin auth.** Admin access uses username/password via HTTP headers. For production this should be role-based and tied to Supabase users.
 
-**No dedicated Payment table.** Billing status is derived from reservation status. A production system would have a separate `Payment` or `Order` table and use Razorpay webhooks as the source of truth rather than the client-side callback.
+**No dedicated Payment table.** Billing status is derived from reservation status. A production system would have a separate `Payment` table and use Razorpay webhooks as the source of truth.
 
-**Zod on the backend only.** Zod validates all API request bodies on the backend. Frontend forms use minimal client-side checks. Sharing schemas across the monorepo would be the next step with more time.
-
-**Redis not used.** The spec mentioned Redis for distributed locking. PostgreSQL row-level locking inside transactions achieves the same guarantee without an additional dependency. For a multi-region deployment Redis would be the right choice.
+**Redis not used.** PostgreSQL row-level locking inside transactions achieves the same guarantee without an extra dependency. For a multi-region deployment Redis would be the right choice.
